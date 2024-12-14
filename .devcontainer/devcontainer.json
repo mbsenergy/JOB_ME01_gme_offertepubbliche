@@ -1,6 +1,6 @@
 {
-    "name": "R Dev Environment",
-    "image": "docker.io/alejandrocerved/fluxerdev:4.4.1",
+    "name": "Fluxer Env",
+    "image": "docker.io/alejandrocerved/devbase:v.1.0",
     "customizations": {
         "vscode": {
             "extensions": [
