@@ -5,11 +5,24 @@ print(glue::glue("{crayon::magenta('[JOB - Starting...]')}"))
 
 # ENV Variables -------------------------------------------------------------------
 
-job_name = 'JOB_XX01_template'
-database_name = 'trial_db'
+job_name = 'JOB_ME01_offertepubbliche'
+database_name = 'postgres'
 use_DATE = FALSE
 
 # Setup ----------------------------------------------------------------------
+
+## Log into PostgresSQL ------------
+ 
+con = DBI::dbConnect(
+    RPostgres::Postgres(),
+    host = Sys.getenv('PG_FLUX_HOST'),
+    port = Sys.getenv('PG_FLUX_PORT'),
+    dbname = Sys.getenv('PG_FLUX_DBNAME'),
+    user = Sys.getenv('PG_FLUX_USER'),
+    password = Sys.getenv('PG_FLUX_PSW'),
+    sslmode = "require"  
+  )
+
 
 source('RScripts/functions.R')
 

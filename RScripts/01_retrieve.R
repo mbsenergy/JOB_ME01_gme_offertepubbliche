@@ -1,5 +1,5 @@
 
-print(glue("{crayon::cyan('[INIT - 01.Retrive]')}"))
+print(glue::glue("{crayon::cyan('[INIT - 01.Retrive]')}"))
 
 # Required libraries
 box::use(data.table[...])
@@ -24,7 +24,7 @@ failed_tables_retrieve = data.table::data.table(
 # MGP --------------------------------------------------------------
  
 # n <- 30
-n <- 30
+n <- 15
 
 data_type <- 'MGP'
 username <- "PIASARACENO"
@@ -317,4 +317,4 @@ check_process_01 = all(check_dt_01, check_dt_02, check_dt_03, check_dt_04)
 objects_to_keep = c('n_elements', 'failed_tables_retrieve', "check_process_01", "dt_all_raw", 'database_name', 'job_name', 'use_DATE', 'conn')
 rm(list = setdiff(ls(), objects_to_keep))
 
-print(glue("{crayon::bgCyan('[DONE - 01.Retrieve]')}"))
+print(glue::glue("{crayon::bgCyan('[DONE - 01.Retrieve]')}"))
