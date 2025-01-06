@@ -7,7 +7,7 @@ print(glue::glue("{crayon::magenta('[JOB - Starting...]')}"))
 
 job_name = 'JOB_ME01_offertepubbliche'
 database_name = 'postgres'
-use_DATE = FALSE
+use_DATE = TRUE
 
 # Setup ----------------------------------------------------------------------
 
@@ -23,6 +23,12 @@ con = DBI::dbConnect(
     sslmode = "require"  
   )
 
+if(exists("con")) {
+    print(glue("{crayon::green('[CONNECTED PG]')}"))
+} else {
+    print(glue("{crayon::green('[ERROR PG]')}"))
+}
+
 
 source('RScripts/functions.R')
 
@@ -32,13 +38,31 @@ check_process_03 = NULL
 
 failed_tables_retrieve = NULL
 failed_tables_prepare = NULL
-failed_tables = NULL
-nonew_data_tables = NULL
-new_data_tables = NULL
-new_tables = NULL
+
+# Initialize a list to store names of failed table creations
+failed_tables <- data.table::data.table(
+    table_name = character(),
+    num_rows = integer(),
+    type = character()
+)
+nonew_data_tables <- data.table::data.table(
+    table_name = character(),
+    num_rows = integer(),
+    type = character()
+)
+new_data_tables <- data.table::data.table(
+    table_name = character(),
+    num_rows = integer(),
+    type = character()
+)
+new_tables <- data.table::data.table(
+    table_name = character(),
+    num_rows = integer(),
+    type = character()
+)
 
 
-# 01. Retrieve data from FRED --------------------------------------------------------
+# 01. Retrieve data from GME --------------------------------------------------------
 
 source('RScripts/01_retrieve.R')
 if(!check_process_01) {

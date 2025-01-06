@@ -1,11 +1,11 @@
 {
     "git.enableSmartCommit": true,
-    "workbench.colorTheme": "GitHub Dark",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
     "files.associations": {
         "*.rmd": "markdown"
     },
     "workbench.iconTheme": "symbols",
-    "workbench.productIconTheme": "macos-modern",  
+    "workbench.productIconTheme": "Default",  
     "editor.tabSize": 4,
     "editor.insertSpaces": true,      
     "r.alwaysUseActiveTerminal": true,
