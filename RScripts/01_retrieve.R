@@ -12,6 +12,9 @@ box::use(fluxer[...])
 
 print('[00/03]')
 
+n <- 70
+
+
 #1. GET DATA ------------------------------------------------------------
 
 dt_all_raw = list()
@@ -30,7 +33,6 @@ if (use_DATE) {
     from_data <- as.Date(date_info$max_date)
   } 
 
-n <- 30
 
 data_type <- 'MGP'
 username <- "PIASARACENO"
@@ -120,6 +122,12 @@ username <- "PIASARACENO"
 password <- "18N15C9R"
 output_dir = "data"
 
+if (use_DATE) {
+  # Step 1: Get min and max dates
+  date_info <- db_get_minmax_dates(con, 'ME01_gme_msd_offers', 'BID_OFFER_DATE_DT_PARSED')
+  from_data <- as.Date(date_info$max_date)
+} 
+
 # Get filename list -----------------------------------
 msd_offers_files = gme_offers_get_files(data_type = data_type, output_dir = output_dir, username = username, password = password)
 
@@ -132,10 +140,8 @@ print('[02/11]')
 
 # Extract the last n elements
 last_n_files <- tail(msd_offers_files, n)
-filtered_files = last_n_files[as.Date(substr(last_n_files, 1, 8), format = "%Y%m%d") > from_data]
 
-
-list_msd_offers <- lapply(filtered_files, function(file) {
+list_msd_offers <- lapply(last_n_files, function(file) {
     tryCatch({
         # Call gme_download_offers_file with explicit arguments
         gme_download_offers_file(
@@ -177,6 +183,12 @@ username <- "PIASARACENO"
 password <- "18N15C9R"
 output_dir = "data"
 
+if (use_DATE) {
+  # Step 1: Get min and max dates
+  date_info <- db_get_minmax_dates(con, 'ME01_gme_mb_offers', 'BID_OFFER_DATE_DT_PARSED')
+  from_data <- as.Date(date_info$max_date)
+} 
+
 # Get filename list -----------------------------------
 mb_offers_files = gme_offers_get_files(data_type = data_type, output_dir = output_dir, username = username, password = password)
 
@@ -189,10 +201,9 @@ print('[03/11]')
 
 # Extract the last n elements
 last_n_files <- tail(mb_offers_files, n)
-filtered_files = last_n_files[as.Date(substr(last_n_files, 1, 8), format = "%Y%m%d") > from_data]
+last_n_files = last_n_files[as.Date(substr(last_n_files, 1, 8), format = "%Y%m%d") > from_data]
 
-
-list_mb_offers <- lapply(filtered_files, function(file) {
+list_mb_offers <- lapply(last_n_files, function(file) {
     tryCatch({
         # Call gme_download_offers_file with explicit arguments
         gme_download_offers_file(

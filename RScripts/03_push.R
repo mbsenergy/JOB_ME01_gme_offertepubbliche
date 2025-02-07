@@ -118,7 +118,7 @@ for (i in seq_along(dt_all_elaborated)) {
 
     } else {
         data_new = copy(data)
-        dbWriteTable(con, table_name, data_new, overwrite = FALSE, append = FALSE)
+        dbWriteTable(con, table_name, data_new, overwrite = TRUE, append = FALSE)
         new_tables <- rbind(new_tables, data.table::data.table(
                 table_name = table_name,
                 num_rows = nrow(data_new),

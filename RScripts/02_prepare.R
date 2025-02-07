@@ -3,6 +3,11 @@ print(glue("{crayon::cyan('[INIT - 02.Prepare]')}"))
 box::use(data.table[...])
 box::use(magrittr[...])
 
+# if(length(dt_all_raw) == 0) {
+#     dt_all_raw = readRDS('dt_all_raw.rds')
+#   }
+
+
 # 2. TRANSFORM TABLE----------------------------------
 dt_all_elaborated = list()
 failed_tables_prepare = data.table::data.table(
@@ -35,7 +40,7 @@ check_dt_1_b = !is.null(dt_01_01)
 check_dt_1 = all(check_dt_1_a, check_dt_1_b)
 
 if(isTRUE(check_dt_1)) {
-    dt_all_elaborated[["ME01_gme_mgp_offers"]] = dt_01_01
+    dt_all_elaborated[["ME01_gme_mgp_offers"]] = dt
 } else {
     failed_tables_prepare <- rbind(failed_tables_prepare, data.table::data.table(
     table_name = 'ME01_gme_mgp_offers',
@@ -49,7 +54,7 @@ print('[01/11]')
 ##  2.2 MSD ------------
 
 dt_01_02 <- tryCatch({
-    dt = copy(dt_all_raw$dt_mgp_offers) 
+    dt = copy(dt_all_raw$dt_msd_offers) 
     setDT(dt)
     setnames(dt, toupper(names(dt)))
     dt[, md_source := "GME"] 
@@ -150,6 +155,7 @@ print('[04/11]')
 
 # EXPORT ELABORATED ===========================================================================
 saveRDS(dt_all_elaborated, 'dt_all_elaborated.rds')
+
 
 
 # xxx. CHECK ===========================================================================
