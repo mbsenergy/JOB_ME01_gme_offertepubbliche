@@ -12,8 +12,6 @@ box::use(fluxer[...])
 
 print('[00/03]')
 
-n <- 70
-
 
 #1. GET DATA ------------------------------------------------------------
 
@@ -29,7 +27,7 @@ failed_tables_retrieve = data.table::data.table(
  
 if (use_DATE) {
     # Step 1: Get min and max dates
-    date_info <- db_get_minmax_dates(con, 'ME01_gme_mgp_offers', 'BID_OFFER_DATE_DT_PARSED')
+    date_info <- db_get_minmax_dates(con, 'ME01_gme_mgp_offers', 'DATE')
     from_data <- as.Date(date_info$max_date)
   } 
 
@@ -46,15 +44,13 @@ mgp_offers_files = gme_offers_get_files(data_type = data_type, output_dir = outp
 check_dt_01 = all(!is.null(mgp_offers_files))
 
 
-print('[01/11]')
+print('[01/04]')
 
 
 # Extract the last n elements
-last_n_files <- tail(mgp_offers_files, n)
-filtered_files = last_n_files[as.Date(substr(last_n_files, 1, 8), format = "%Y%m%d") > from_data]
+last_n_files = mgp_offers_files[as.Date(substr(mgp_offers_files, 1, 8), format = "%Y%m%d") > from_data]
 
-
-list_mgp_offers <- lapply(filtered_files, function(file) {
+list_mgp_offers <- lapply(last_n_files, function(file) {
     tryCatch({
         # Call gme_download_offers_file with explicit arguments
         gme_download_offers_file(
@@ -74,30 +70,6 @@ list_mgp_offers <- lapply(filtered_files, function(file) {
  
 dt_mgp_offers = rbindlist(list_mgp_offers, fill=TRUE)
 
-# ## In case of missing retrived files
-# ret_files = unique(dt_mgp_offers$bid_offer_date_dt_parsed)
-# filtered_files = find_missing_dates(ret_files, full_week = TRUE)
-
-# if() {
-#     list_mgp_offers_miss <- lapply(filtered_files, function(file) {
-#     tryCatch({
-#         # Call gme_download_offers_file with explicit arguments
-#         gme_download_offers_file(
-#             filename = file,  
-#             data_type = data_type,
-#             output_dir = output_dir,
-#             username = username,       # FTP username for authentication
-#             password = password,       # FTP password for authentication
-#             raw = FALSE
-#         )
-#     }, error = function(e) {
-#         # In case of an error (e.g., failed download or processing), return NULL
-#         message("Error processing file: ", file, " - ", e$message)
-#         return(NULL)
-#     })
-# })
-# }
-
 
 
 # check 
@@ -112,7 +84,6 @@ if(isTRUE(check_dt_02)) {
     type = 'ERROR_RETRIEVE'
     ))
 }
-print('[01/11]')
  
  
 # MSD --------------------------------------------------------------
@@ -124,7 +95,7 @@ output_dir = "data"
 
 if (use_DATE) {
   # Step 1: Get min and max dates
-  date_info <- db_get_minmax_dates(con, 'ME01_gme_msd_offers', 'BID_OFFER_DATE_DT_PARSED')
+  date_info <- db_get_minmax_dates(con, 'ME01_gme_msd_offers', 'DATE')
   from_data <- as.Date(date_info$max_date)
 } 
 
@@ -135,11 +106,11 @@ msd_offers_files = gme_offers_get_files(data_type = data_type, output_dir = outp
 check_dt_02 = all(!is.null(msd_offers_files))
 
 
-print('[02/11]')
+print('[02/04]')
 
 
 # Extract the last n elements
-last_n_files <- tail(msd_offers_files, n)
+last_n_files = msd_offers_files[as.Date(substr(msd_offers_files, 1, 8), format = "%Y%m%d") > from_data]
 
 list_msd_offers <- lapply(last_n_files, function(file) {
     tryCatch({
@@ -173,11 +144,10 @@ if(isTRUE(check_dt_02)) {
     type = 'ERROR_RETRIEVE'
     ))
 }
-print('[02/11]')
  
  
 # MB --------------------------------------------------------------
- 
+
 data_type <- 'MB'
 username <- "PIASARACENO"
 password <- "18N15C9R"
@@ -185,7 +155,7 @@ output_dir = "data"
 
 if (use_DATE) {
   # Step 1: Get min and max dates
-  date_info <- db_get_minmax_dates(con, 'ME01_gme_mb_offers', 'BID_OFFER_DATE_DT_PARSED')
+  date_info <- db_get_minmax_dates(con, 'ME01_gme_mb_offers', 'DATE')
   from_data <- as.Date(date_info$max_date)
 } 
 
@@ -196,12 +166,11 @@ mb_offers_files = gme_offers_get_files(data_type = data_type, output_dir = outpu
 check_dt_03 = all(!is.null(mb_offers_files))
 
 
-print('[03/11]')
+print('[03/04]')
 
 
 # Extract the last n elements
-last_n_files <- tail(mb_offers_files, n)
-last_n_files = last_n_files[as.Date(substr(last_n_files, 1, 8), format = "%Y%m%d") > from_data]
+last_n_files = mb_offers_files[as.Date(substr(mb_offers_files, 1, 8), format = "%Y%m%d") > from_data]
 
 list_mb_offers <- lapply(last_n_files, function(file) {
     tryCatch({
@@ -235,7 +204,6 @@ if(isTRUE(check_dt_03)) {
     type = 'ERROR_RETRIEVE'
     ))
 }
-print('[03/011]') 
  
  
 # XBID --------------------------------------------------------------
@@ -252,15 +220,13 @@ xbid_offers_files = gme_offers_get_files(data_type = data_type, output_dir = out
 check_dt_04 = all(!is.null(xbid_offers_files))
 
 
-print('[04/11]')
+print('[04/04]')
 
 
 # Extract the last n elements
-last_n_files <- tail(xbid_offers_files, n)
-filtered_files = last_n_files[as.Date(substr(last_n_files, 1, 8), format = "%Y%m%d") > from_data]
-
+last_n_files = xbid_offers_files[as.Date(substr(xbid_offers_files, 1, 8), format = "%Y%m%d") > from_data]
  
-list_xbid_offers <- lapply(filtered_files, function(file) {
+list_xbid_offers <- lapply(last_n_files, function(file) {
     tryCatch({
         # Call gme_download_offers_file with explicit arguments
         gme_download_offers_file(
@@ -292,7 +258,6 @@ if(isTRUE(check_dt_04)) {
     type = 'ERROR_RETRIEVE'
     ))
 }
-print('[04/11]') 
  
  
 # MI-A1 --------------------------------------------------------------

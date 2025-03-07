@@ -12,7 +12,7 @@ box::use(magrittr[...])
 
 
 
-## 3. conECT TO PG AND LOAD ----------------------------------
+## 3. CONNECT TO PG AND LOAD ----------------------------------
 
 ##  3.1 Log into PostgresSQL ------------
  

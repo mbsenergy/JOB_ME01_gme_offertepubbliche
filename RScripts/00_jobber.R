@@ -5,8 +5,6 @@ print(glue::glue("{crayon::magenta('[JOB - Starting...]')}"))
 
 # ENV Variables -------------------------------------------------------------------
 
-job_name = 'JOB_ME01_offertepubbliche'
-database_name = 'postgres'
 use_DATE = TRUE
 
 # Setup ----------------------------------------------------------------------

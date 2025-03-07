@@ -22,7 +22,8 @@ dt_01_01 <- tryCatch({
     dt = copy(dt_all_raw$dt_mgp_offers) 
     setDT(dt)
     setnames(dt, toupper(names(dt)))
-
+    setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
+    
     dt[, md_source := "GME"] 
     dt[, md_table := "MGP Offers"] 
     dt[, md_last_update := Sys.Date()] 
@@ -35,7 +36,7 @@ dt_01_01 <- tryCatch({
         message(glue::glue("{crayon::bgRed('[ERROR]')} {e$message}"))  # Print error message
         NULL  
 })
-check_dt_1_a = all(nrow(dt_01_01) > 0 & ncol(dt_01_01) == 28)
+check_dt_1_a = all(nrow(dt_01_01) > 0 & ncol(dt_01_01) == 32)
 check_dt_1_b = !is.null(dt_01_01)  
 check_dt_1 = all(check_dt_1_a, check_dt_1_b)
 
@@ -48,7 +49,7 @@ if(isTRUE(check_dt_1)) {
     type = 'ERROR_PREPARE'
     ))
 }
-print('[01/11]')
+print('[01/04]')
  
  
 ##  2.2 MSD ------------
@@ -57,6 +58,8 @@ dt_01_02 <- tryCatch({
     dt = copy(dt_all_raw$dt_msd_offers) 
     setDT(dt)
     setnames(dt, toupper(names(dt)))
+    setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
+    
     dt[, md_source := "GME"] 
     dt[, md_table := "MSD Offers"] 
     dt[, md_last_update := Sys.Date()] 
@@ -69,7 +72,7 @@ dt_01_02 <- tryCatch({
         message(glue::glue("{crayon::bgRed('[ERROR]')} {e$message}"))  # Print error message
         NULL  
 })
-check_dt_2_a = all(nrow(dt_01_02) > 0 & ncol(dt_01_02) == 28)
+check_dt_2_a = all(nrow(dt_01_02) > 0 & ncol(dt_01_02) == 32)
 check_dt_2_b = !is.null(dt_01_02)  
 check_dt_2 = all(check_dt_2_a, check_dt_2_b)
 
@@ -82,7 +85,7 @@ if(isTRUE(check_dt_2)) {
     type = 'ERROR_PREPARE'
     ))
 }
-print('[02/11]') 
+print('[02/04]') 
  
  
 ##  2.3 MB ------------
@@ -91,6 +94,8 @@ dt_01_03 <- tryCatch({
     dt = copy(dt_all_raw$dt_mb_offers) 
     setDT(dt)
     setnames(dt, toupper(names(dt)))
+    setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
+    
     dt[, md_source := "GME"] 
     dt[, md_table := "MB Offers"] 
     dt[, md_last_update := Sys.Date()] 
@@ -116,7 +121,7 @@ if(isTRUE(check_dt_3)) {
     type = 'ERROR_PREPARE'
     ))
 }
-print('[03/11]')  
+print('[03/04]')  
  
  
 ##  2.4 XBID ------------
@@ -125,6 +130,8 @@ dt_01_04 <- tryCatch({
     dt = copy(dt_all_raw$dt_xbid_offers) 
     setDT(dt)
     setnames(dt, toupper(names(dt)))
+    setnames(dt, 'TIMESTAMP', 'DATETIME')
+    
     dt[, md_source := "GME"] 
     dt[, md_table := "XBID Offers"] 
     dt[, md_last_update := Sys.Date()] 
@@ -150,7 +157,7 @@ if(isTRUE(check_dt_4)) {
     type = 'ERROR_PREPARE'
     ))
 }
-print('[04/11]')  
+print('[04/04]')  
 
 
 # EXPORT ELABORATED ===========================================================================
