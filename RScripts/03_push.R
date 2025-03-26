@@ -2,16 +2,6 @@
 print(glue("{crayon::cyan('[INIT - 03.Push]')}"))
 # source(fs::path('RScripts', 'functions.R'))
 
-# Required libraries
-box::use(DBI[...])
-box::use(RPostgreSQL[...])
-box::use(RPostgres[...])
-box::use(glue[...])
-box::use(data.table[...])
-box::use(magrittr[...])
-
-
-
 ## 3. CONNECT TO PG AND LOAD ----------------------------------
 
 ##  3.1 Log into PostgresSQL ------------
@@ -33,30 +23,6 @@ if(exists("con")) {
 }
  
  ##  3.2 Update tables in MD ------------
-
-# Initialize a list to store names of failed table creations
-failed_tables <- data.table::data.table(
-    table_name = character(),
-    num_rows = integer(),
-    type = character()
-)
-nonew_data_tables <- data.table::data.table(
-    table_name = character(),
-    num_rows = integer(),
-    type = character()
-)
-new_data_tables <- data.table::data.table(
-    table_name = character(),
-    num_rows = integer(),
-    type = character()
-)
-new_tables <- data.table::data.table(
-    table_name = character(),
-    num_rows = integer(),
-    type = character()
-)
-
-use_DATE = FALSE
 
 # Loop through the list of data frames (dt_all_elaborated)
 for (i in seq_along(dt_all_elaborated)) {
@@ -100,7 +66,7 @@ for (i in seq_along(dt_all_elaborated)) {
             ))
         message(glue("{crayon::bgGreen('[OK]')} Data appended table '{table_name}': '{nrows}'"))
         }, error = function(e) {
-            failed_tables <- rbind(failed_tables, data.table::data.table(
+          failed_tables_push <- rbind(failed_tables_push, data.table::data.table(
                 table_name = table_name,
                 num_rows = 0,
                 type = 'ERROR_wNEWDATA'
@@ -132,40 +98,42 @@ for (i in seq_along(dt_all_elaborated)) {
 
 
 
+
 # 4. GENERAL CHECKS ----------------------------------------------------------
 
 # Print the list of failed table names
-check_log_1 = nrow(failed_tables) > 0
-check_log_2 = nrow(new_tables) > 0
-check_log = all(!check_log_1 & !check_log_2)
+
+summary_table = rbindlist(list(new_data_tables[type == 'NEW_DATA'], new_tables, nonew_data_tables, failed_tables_prepare, failed_tables_retrieve, failed_tables_push))
+summary_table[, md_job := 'ME01_gme_prices'] 
+summary_table[, md_last_update := Sys.Date()] 
+setcolorder(summary_table, c('md_job', 'md_last_update', 'table_name', 'num_rows', 'type'))
+
+check_log = summary_table[num_rows > 0, .N] == length(dt_all_elaborated)
+check_log_2 = nrow(new_tables) == 0
 
 if(check_log) {
-    message(glue("{crayon::bgGreen('[OK]')} All tables updated successfully!"))
+  message(glue("{crayon::bgGreen('[OK]')} All tables updated successfully!"))
 } else {
-    message(glue("{crayon::bgRed('[ERROR]')} The following tables failed to be updated: {paste(failed_tables, collapse = ', ')}"))
+  message(glue("{crayon::bgRed('[ERROR]')} The following tables failed to be updated: {paste(failed_tables_push, collapse = ', ')}"))
 }
 
 if(check_log_2) {
-    message(glue("{crayon::bgYellow('[NOTE]')} The following tables were created from scratch: {paste(new_tables, collapse = ', ')}"))
+  message(glue("{crayon::bgYellow('[NOTE]')} The following tables were created from scratch: {paste(new_tables, collapse = ', ')}"))
 }
 
-if(check_log) {
-    check_process_03 = TRUE
+if(check_log & check_log_2) {
+  check_process_03 = TRUE
 } else {
-    check_process_03 = FALSE
+  check_process_03 = FALSE
 }
 
-objects_to_keep = c('n_elements', 'failed_tables_retrieve', 'failed_tables_prepare', 'check_process_01', "check_process_02", "check_process_03", "failed_tables", 'nonew_data_tables', 'new_tables', 'new_data_tables', 'database_name', 'job_name', 'con')
+objects_to_keep = c('new_data_tables', 'new_tables', 'nonew_data_tables', 'failed_tables_retrieve', 'failed_tables_prepare', "check_process_01", 'check_process_02', 'check_process_03', "dt_all_raw", 'dt_all_elaborated', 'use_DATE', 'conn')
 rm(list = setdiff(ls(), objects_to_keep))
 
 
 # 5. UPDATE SHARE DB ----------------------------------------------------------
 
-# if(check_process_03) {
-#     dbExecute(con, paste('USE', database_name))
-#     dbExecute(con, paste(' UPDATE SHARE', database_name, ';'))
-#     message(glue("{crayon::bgGreen('[OK]')} DB Share updated correctly"))
-# }
+DBI::dbAppendTable(con, 'table_logs', summary_table)
+message(glue("{crayon::bgGreen('[OK]')} DB Share updated correctly"))
 
 print(glue("{crayon::bgCyan('[DONE - 03.Push]')}"))
-

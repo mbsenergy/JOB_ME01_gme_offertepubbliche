@@ -1,6 +1,6 @@
 {
     "git.enableSmartCommit": true,
-    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "workbench.colorTheme": "Community Material Theme High Contrast",
     "files.associations": {
         "*.rmd": "markdown"
     },
