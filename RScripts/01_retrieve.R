@@ -60,7 +60,7 @@ if(isTRUE(check_load)) {
   new_data_tables = rbind(new_data_tables, data.table::data.table(
     table_name = 'ME01_gme_mgp_offers',
     num_rows = 0,
-    type = 'NO_NEW_DATA'
+    type = 'NEW_DATA'
   ))
 } 
 
@@ -131,7 +131,7 @@ if(isTRUE(check_load)) {
   new_data_tables = rbind(new_data_tables, data.table::data.table(
     table_name = 'ME01_gme_msd_offers',
     num_rows = 0,
-    type = 'NO_NEW_DATA'
+    type = 'NEW_DATA'
   ))
 } 
 
@@ -202,7 +202,7 @@ if(isTRUE(check_load)) {
   new_data_tables = rbind(new_data_tables, data.table::data.table(
     table_name = 'ME01_gme_mb_offers',
     num_rows = 0,
-    type = 'NO_NEW_DATA'
+    type = 'NEW_DATA'
   ))
 } 
 
@@ -273,7 +273,7 @@ if(isFALSE(check_load) & isFALSE(check_files)) {
 #   new_data_tables = rbind(new_data_tables, data.table::data.table(
 #     table_name = 'ME01_gme_mgp_prices',
 #     num_rows = 0,
-#     type = 'NO_NEW_DATA'
+#     type = 'NEW_DATA'
 #   ))
 # } 
 # 
