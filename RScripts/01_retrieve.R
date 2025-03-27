@@ -361,7 +361,7 @@ saveRDS(dt_all_raw, 'dt_all_raw.rds')
 
 check_process_01 = nrow(new_data_tables) + nrow(nonew_data_tables) + nrow(failed_tables_retrieve) == 3
 
-objects_to_keep = c('new_data_tables', 'new_tables', 'nonew_data_tables', 'failed_tables_retrieve', 'failed_tables_prepare', 'failed_tables_push', "check_process_01", 'check_process_02', 'check_process_03', "dt_all_raw", 'use_DATE', 'conn')
+objects_to_keep = c('new_data_tables', 'new_tables', 'nonew_data_tables', 'failed_tables_retrieve', 'failed_tables_prepare', 'failed_tables_push', "check_process_01", 'check_process_02', 'check_process_03', "dt_all_raw", 'use_DATE', 'con')
 rm(list = setdiff(ls(), objects_to_keep))
 
 print(glue("{crayon::bgCyan('[DONE - 01.Retrieve]')}"))

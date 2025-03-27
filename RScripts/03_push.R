@@ -127,7 +127,7 @@ if(check_log & check_log_2) {
   check_process_03 = FALSE
 }
 
-objects_to_keep = c('new_data_tables', 'new_tables', 'nonew_data_tables', 'failed_tables_retrieve', 'failed_tables_prepare', "check_process_01", 'check_process_02', 'check_process_03', "dt_all_raw", 'dt_all_elaborated', 'use_DATE', 'conn')
+objects_to_keep = c('new_data_tables', 'new_tables', 'nonew_data_tables', 'failed_tables_retrieve', 'failed_tables_prepare', "check_process_01", 'check_process_02', 'check_process_03', "dt_all_raw", 'dt_all_elaborated', 'use_DATE', 'con', 'summary_table')
 rm(list = setdiff(ls(), objects_to_keep))
 
 
