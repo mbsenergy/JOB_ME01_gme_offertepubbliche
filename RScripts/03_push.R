@@ -104,7 +104,7 @@ for (i in seq_along(dt_all_elaborated)) {
 # Print the list of failed table names
 
 summary_table = rbindlist(list(new_data_tables[type == 'NEW_DATA'], new_tables, nonew_data_tables, failed_tables_prepare, failed_tables_retrieve, failed_tables_push))
-summary_table[, md_job := 'ME01_gme_prices'] 
+summary_table[, md_job := 'ME01_gme_offertepubbliche'] 
 summary_table[, md_last_update := Sys.Date()] 
 setcolorder(summary_table, c('md_job', 'md_last_update', 'table_name', 'num_rows', 'type'))
 
