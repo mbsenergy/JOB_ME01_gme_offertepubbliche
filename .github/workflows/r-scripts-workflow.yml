@@ -1,4 +1,4 @@
-name: jobber_ME01_gme
+name: jobber_ME01_gme_offers
 
 on:
   push:
