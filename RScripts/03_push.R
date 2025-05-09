@@ -109,7 +109,7 @@ summary_table[, md_last_update := Sys.Date()]
 setcolorder(summary_table, c('md_job', 'md_last_update', 'table_name', 'num_rows', 'type'))
 
 check_log = summary_table[num_rows > 0, .N] == length(dt_all_elaborated)
-check_log_2 = nrow(new_tables) == 0
+check_log_2 = nrow(new_tables) != 0
 
 if(check_log) {
   message(glue("{crayon::bgGreen('[OK]')} All tables updated successfully!"))
@@ -121,7 +121,7 @@ if(check_log_2) {
   message(glue("{crayon::bgYellow('[NOTE]')} The following tables were created from scratch: {paste(new_tables, collapse = ', ')}"))
 }
 
-if(check_log & check_log_2) {
+if(check_log & !check_log_2) {
   check_process_03 = TRUE
 } else {
   check_process_03 = FALSE
