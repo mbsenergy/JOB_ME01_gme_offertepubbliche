@@ -235,15 +235,21 @@ if (use_DATE) {
   from_data <- as.Date(date_info$max_date)
 }
 
-from_data <- as.Date('2022-12-31')
+from_data <- as.Date('2024-12-28')  # data di inizio
+to_data   <- as.Date('2024-12-31')  # data di fine
+
+
 # Get filename list -----------------------------------
 xbid_offers_files = gme_offers_get_files(data_type = 'XBID', output_dir = output_dir, username = username, password = password)
 
 print('[04/07]')
 
 
+
+
 # Extract the last n elements
-last_files = xbid_offers_files[as.Date(substr(xbid_offers_files, 1, 8), format = "%Y%m%d") > from_data]
+last_files = xbid_offers_files[as.Date(substr(xbid_offers_files, 1, 8), format = "%Y%m%d") > from_data &
+                                 as.Date(substr(xbid_offers_files, 1, 8), format = "%Y%m%d") <=  to_data]
 if (!exists("last_files") || length(last_files) == 0 || all(is.na(last_files))) {last_files = character(0)}
 
 list_xbid_offers <- lapply(last_files, function(file) {
@@ -268,7 +274,7 @@ dt_xbid_offers = rbindlist(list_xbid_offers, fill=TRUE)
 dt_xbid_offers[, bid_offer_date_dt_parsed := as.IDate(sub("T.*", "", timestamp))]
 saveRDS(dt_xbid_offers, file = "dt_xbid_offers.rds")
 dt_xbid_offers <- as.data.table(readRDS("dt_xbid_offers.rds"))
-
+names(dt_xbid_offers)
 
 
 # check
@@ -313,7 +319,8 @@ if (use_DATE) {
   from_data <- as.Date(date_info$max_date)
 }
 
-from_data <- as.Date('2022-12-31')
+from_data <- as.Date('2025-06-28')  # data di inizio
+to_data   <- as.Date('2025-06-30')  # data di fine
 
 # from_data <- as.Date('2025-06-01')
 # Get filename list -----------------------------------
@@ -322,8 +329,14 @@ mia1_offers_files = gme_offers_get_files(data_type = 'MI-A1', output_dir = outpu
 print('[05/07]')
 
 
+file_dates <- as.Date(substr(mia1_offers_files, 1, 8), format = "%Y%m%d")
+#last_files <- mia1_offers_files[file_dates >= from_data & file_dates <= to_data]
+
+
 # Extract the last n elements
-last_files = mia1_offers_files[as.Date(substr(mia1_offers_files, 1, 8), format = "%Y%m%d") > from_data]
+last_files = mia1_offers_files[as.Date(substr(mia1_offers_files, 1, 8), format = "%Y%m%d") > from_data &
+                                 as.Date(substr(mia1_offers_files, 1, 8), format = "%Y%m%d") <=  to_data]
+
 if (!exists("last_files") || length(last_files) == 0 || all(is.na(last_files))) {last_files = character(0)}
 
 list_mia1_offers <- lapply(last_files, function(file) {
@@ -345,9 +358,10 @@ list_mia1_offers <- lapply(last_files, function(file) {
 })
 
 dt_mia1_offers = rbindlist(list_mia1_offers, fill=TRUE)
-saveRDS(dt_mia1_offers, file = "dt_mia1_offers.rds")
-dt_mia1_offers <- as.data.table(readRDS("dt_mia1_offers.rds"))
+saveRDS(dt_mia1_offers, file = "dt_mia1_offers_2023.rds")
+dt_mia1_offers <- as.data.table(readRDS("dt_mia1_offers_2023.rds"))
 
+names(dt_mia1_offers)
 
 
 # check
@@ -399,7 +413,8 @@ print('[06/07]')
 
 
 # Extract the last n elements
-last_files = mia2_offers_files[as.Date(substr(mia2_offers_files, 1, 8), format = "%Y%m%d") > from_data]
+last_files = mia2_offers_files[as.Date(substr(mia2_offers_files, 1, 8), format = "%Y%m%d") > from_data &
+                                 as.Date(substr(mia2_offers_files, 1, 8), format = "%Y%m%d") <=  to_data]
 if (!exists("last_files") || length(last_files) == 0 || all(is.na(last_files))) {last_files = character(0)}
 
 list_mia2_offers <- lapply(last_files, function(file) {
@@ -471,8 +486,8 @@ print('[07/07]')
 
 
 # Extract the last n elements
-last_files = mia3_offers_files[as.Date(substr(mia3_offers_files, 1, 8), format = "%Y%m%d") > from_data]
-if (!exists("last_files") || length(last_files) == 0 || all(is.na(last_files))) {last_files = character(0)}
+last_files = mia3_offers_files[as.Date(substr(mia3_offers_files, 1, 8), format = "%Y%m%d") > from_data &
+                                 as.Date(substr(mia3_offers_files, 1, 8), format = "%Y%m%d") <=  to_data]if (!exists("last_files") || length(last_files) == 0 || all(is.na(last_files))) {last_files = character(0)}
 
 list_mia3_offers <- lapply(last_files, function(file) {
   tryCatch({
