@@ -1,57 +1,57 @@
-name: jobber_ME01_gme_offers
-
-on:
-  push:
-    branches:
-      - main  
-  schedule:
-    - cron: '0 0 * * *'  
-
-jobs:
-  run-r-job:
-    runs-on: ubuntu-22.04
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up R and renv
-      uses: r-lib/actions/setup-r@v2
-      
-    - name: Install system dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libssl-dev libsasl2-dev jq libpq-dev libcurl4-openssl-dev pkg-config
-        sudo apt-get install -y libxml2-dev libgit2-dev
-        sudo apt-get install --reinstall -y curl
-        echo "Checking libcurl version..."
-        curl-config --version || echo "libcurl is missing"
-        echo "Checking curl.h path..."
-        find /usr -name curl.h 2>/dev/null      
-      
-    - name: Uses renv
-      uses: r-lib/actions/setup-renv@v2      
-
-    - name: Install `fluxer` package from GitHub
-      env:
-        GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
-      run: |
-        Rscript -e "install.packages('remotes')"
-        Rscript -e "install.packages('curl')"
-        Rscript -e "Sys.setenv(GITHUB_PAT = '${{ secrets.PAT_GITHUB }}')"
-        Rscript -e "remotes::install_github('mbsenergy/fluxer')"
-
-    - name: Install dependencies with renv
-      run: |
-        Rscript -e "install.packages('renv')"
-        Rscript -e "renv::restore()"
-
-    - name: Run Jobber full script
-      env:
-        PG_FLUX_DBNAME: ${{ secrets.PG_FLUX_DBNAME }}
-        PG_FLUX_HOST: ${{ secrets.PG_FLUX_HOST }}
-        PG_FLUX_PORT: ${{ secrets.PG_FLUX_PORT }}
-        PG_FLUX_USER: ${{ secrets.PG_FLUX_USER }}
-        PG_FLUX_PSW: ${{ secrets.PG_FLUX_PSW }}
-      run: |
-        Rscript RScripts/00_jobber.R
+# name: jobber_ME01_gme_offers
+# 
+# on:
+#   push:
+#     branches:
+#       - main  
+#   schedule:
+#     - cron: '0 0 * * *'  
+# 
+# jobs:
+#   run-r-job:
+#     runs-on: ubuntu-22.04
+# 
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v2
+# 
+#     - name: Set up R and renv
+#       uses: r-lib/actions/setup-r@v2
+#       
+#     - name: Install system dependencies
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install -y libssl-dev libsasl2-dev jq libpq-dev libcurl4-openssl-dev pkg-config
+#         sudo apt-get install -y libxml2-dev libgit2-dev
+#         sudo apt-get install --reinstall -y curl
+#         echo "Checking libcurl version..."
+#         curl-config --version || echo "libcurl is missing"
+#         echo "Checking curl.h path..."
+#         find /usr -name curl.h 2>/dev/null      
+#       
+#     - name: Uses renv
+#       uses: r-lib/actions/setup-renv@v2      
+# 
+#     - name: Install `fluxer` package from GitHub
+#       env:
+#         GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
+#       run: |
+#         Rscript -e "install.packages('remotes')"
+#         Rscript -e "install.packages('curl')"
+#         Rscript -e "Sys.setenv(GITHUB_PAT = '${{ secrets.PAT_GITHUB }}')"
+#         Rscript -e "remotes::install_github('mbsenergy/fluxer')"
+# 
+#     - name: Install dependencies with renv
+#       run: |
+#         Rscript -e "install.packages('renv')"
+#         Rscript -e "renv::restore()"
+# 
+#     - name: Run Jobber full script
+#       env:
+#         PG_FLUX_DBNAME: ${{ secrets.PG_FLUX_DBNAME }}
+#         PG_FLUX_HOST: ${{ secrets.PG_FLUX_HOST }}
+#         PG_FLUX_PORT: ${{ secrets.PG_FLUX_PORT }}
+#         PG_FLUX_USER: ${{ secrets.PG_FLUX_USER }}
+#         PG_FLUX_PSW: ${{ secrets.PG_FLUX_PSW }}
+#       run: |
+#         Rscript RScripts/00_jobber.R

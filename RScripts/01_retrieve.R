@@ -319,8 +319,8 @@ if (use_DATE) {
   from_data <- as.Date(date_info$max_date)
 }
 
-from_data <- as.Date('2025-06-28')  # data di inizio
-to_data   <- as.Date('2025-06-30')  # data di fine
+from_data <- as.Date('2023-01-01')  # data di inizio
+to_data   <- as.Date('2023-12-31')  # data di fine
 
 # from_data <- as.Date('2025-06-01')
 # Get filename list -----------------------------------
