@@ -177,7 +177,6 @@ dt_01_04 <- tryCatch({
   # TIPO corretto
   dt[, TIPO := ifelse(!is.na(Q), "Q", ifelse(!is.na(H), "H", NA_character_))]
   
-  
   setcolorder(dt, neworder = c(  "md_source", "md_table", "md_last_update",
                                  "TRANSACTION_REFERENCE_NO", "PURPOSE_CD", "STATUS_CD", "DATETIME",
                                  "MARKET_CD", "PRODOTTO", "DATE", "H", "Q", "ZONA", "TIPO"))
@@ -186,8 +185,8 @@ dt_01_04 <- tryCatch({
   message(glue::glue("{crayon::bgRed('[ERROR]')} {e$message}"))
   NULL
 })
-
-saveRDS(dt_01_04, file = "dt_xbid_offers_elab.rds")
+dt_01_04[, H := as.numeric(H)]
+dt_01_04[, Q := as.numeric(Q)]
 
 
 check_dt_4_a = all(nrow(dt_01_04) > 0 & ncol(dt_01_04) == 21)
@@ -226,8 +225,13 @@ dt_01_05 <- tryCatch({
 })
 
 
+dt_01_05[, MINIMUM_ACCEPTANCE_RATIO:= NULL ]
+dt_01_05[, BLOCK_ID:= NULL ]
+dt_01_05[, OFFER_TYPE:= NULL ]
+dt_01_05[, TIME:= NA_character_ ]
 
-check_dt_5_a = all(nrow(dt_01_05) > 0 & ncol(dt_01_05) == 29)
+
+check_dt_5_a = all(nrow(dt_01_05) > 0 & ncol(dt_01_05) == 27)
 check_dt_5_b = !is.null(dt_01_05)
 check_dt_5 = all(check_dt_5_a, check_dt_5_b)
 
@@ -240,6 +244,9 @@ if(isTRUE(check_dt_5)) {
     type = 'ERROR_PREPARE'
   ))
 }
+
+
+
 print('[05/07]')
 
 
@@ -251,9 +258,9 @@ dt_01_06 <- tryCatch({
   setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
   
   dt[, md_source := "GME"]
-  dt[, md_table := "mia1 Offers"]
+  dt[, md_table := "mia2 Offers"]
   dt[, md_last_update := Sys.Date()]
-  
+
   setcolorder(dt, neworder = c(  "md_source", "md_table", "md_last_update"))
   dt
 }, error = function(e) {
@@ -261,13 +268,16 @@ dt_01_06 <- tryCatch({
   NULL
 })
 
+dt_01_06[, MINIMUM_ACCEPTANCE_RATIO:= NULL ]
+dt_01_06[, BLOCK_ID:= NULL ]
+dt_01_06[, OFFER_TYPE:= NULL ]
+dt_01_06[, TIME:= NA_character_ ]
 
-
-check_dt_6_a = all(nrow(dt_01_06) > 0 & ncol(dt_01_06) == 15)
+check_dt_6_a = all(nrow(dt_01_06) > 0 & ncol(dt_01_06) == 27)
 check_dt_6_b = !is.null(dt_01_06)
 check_dt_6 = all(check_dt_6_a, check_dt_6_b)
 
-if(isTRUE(check_dt_5)) {
+if(isTRUE(check_dt_6)) {
   dt_all_elaborated[["ME01_gme_mia2_offers"]] = dt_01_06
 } else {
   failed_tables_prepare <- rbind(failed_tables_prepare, data.table::data.table(
@@ -283,7 +293,7 @@ print('[06/07]')
 
 ##  2.7 MI-A3 ------------
 dt_01_07 <- tryCatch({
-  dt = copy(dt_all_raw[['ME01_gme_mia2_offers']])
+  dt = copy(dt_all_raw[['ME01_gme_mia3_offers']])
   setDT(dt)
   setnames(dt, toupper(names(dt)))
   setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
@@ -291,7 +301,7 @@ dt_01_07 <- tryCatch({
   dt[, md_source := "GME"]
   dt[, md_table := "mia1 Offers"]
   dt[, md_last_update := Sys.Date()]
-  
+
   setcolorder(dt, neworder = c(  "md_source", "md_table", "md_last_update"))
   dt
 }, error = function(e) {
@@ -299,9 +309,12 @@ dt_01_07 <- tryCatch({
   NULL
 })
 
+dt_01_07[, MINIMUM_ACCEPTANCE_RATIO:= NULL ]
+dt_01_07[, BLOCK_ID:= NULL ]
+dt_01_07[, OFFER_TYPE:= NULL ]
+dt_01_07[, TIME:= NA_character_ ]
 
-
-check_dt_7_a = all(nrow(dt_01_07) > 0 & ncol(dt_01_07) == 15)
+check_dt_7_a = all(nrow(dt_01_07) > 0 & ncol(dt_01_07) == 27)
 check_dt_7_b = !is.null(dt_01_07)
 check_dt_7 = all(check_dt_7_a, check_dt_7_b)
 
@@ -315,6 +328,7 @@ if(isTRUE(check_dt_7)) {
   ))
 }
 print('[07/07]')
+
 # EXPORT ELABORATED ===========================================================================
 saveRDS(dt_all_elaborated, 'dt_all_elaborated.rds')
 

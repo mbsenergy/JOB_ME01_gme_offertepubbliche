@@ -22,6 +22,8 @@ if(exists("con")) {
     print(glue("{crayon::green('[ERROR PG]')}"))
 }
  
+
+
  ##  3.2 Update tables in MD ------------
 
 # Loop through the list of data frames (dt_all_elaborated)
@@ -94,9 +96,6 @@ for (i in seq_along(dt_all_elaborated)) {
     }
      
 }
-
-
-
 
 
 # 4. GENERAL CHECKS ----------------------------------------------------------
