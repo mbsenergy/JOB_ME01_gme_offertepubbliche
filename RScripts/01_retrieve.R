@@ -18,7 +18,6 @@ if (use_DATE) {
     date_info <- db_get_minmax_dates(con, 'ME01_gme_mgp_offers', 'DATE')
     from_data <- as.Date(date_info$max_date)
   } 
-# from_data <- as.Date('2025-06-01')
 
 # Get filename list -----------------------------------
 mgp_offers_files = gme_offers_get_files(data_type = 'MGP', output_dir = output_dir, username = username, password = password)
@@ -235,8 +234,6 @@ if (use_DATE) {
   from_data <- as.Date(date_info$max_date)
 }
 
-from_data <- as.Date('2023-12-31')  # data di inizio
-to_data   <- as.Date('2024-12-31')  # data di fine
 
 
 # Get filename list -----------------------------------
@@ -248,8 +245,7 @@ print('[04/07]')
 
 
 # Extract the last n elements
-last_files = xbid_offers_files[as.Date(substr(xbid_offers_files, 1, 8), format = "%Y%m%d") > from_data &
-                                 as.Date(substr(xbid_offers_files, 1, 8), format = "%Y%m%d") <=  to_data]
+last_files = xbid_offers_files[as.Date(substr(xbid_offers_files, 1, 8), format = "%Y%m%d") > from_data]
 if (!exists("last_files") || length(last_files) == 0 || all(is.na(last_files))) {last_files = character(0)}
 
 list_xbid_offers <- lapply(last_files, function(file) {
@@ -272,31 +268,6 @@ list_xbid_offers <- lapply(last_files, function(file) {
 
 dt_xbid_offers = rbindlist(list_xbid_offers, fill=TRUE)
 dt_xbid_offers[, bid_offer_date_dt_parsed := as.IDate(sub("T.*", "", timestamp))]
-
-saveRDS(dt_xbid_offers, file = "dt_xbid_offers.rds")
-
-dt_xbid_offers_tot <- as.data.table(readRDS("dt_xbid_offers_2024.rds"))
-names(dt_xbid_offers)
-head(dt_xbid_offers)
-
-n <- nrow(dt_xbid_offers)
-chunk_size <- ceiling(n / 4)
-
-
-# Intervalli corretti
-ix1 <- 1 : chunk_size
-ix2 <- (chunk_size + 1) : min(2 * chunk_size, n)
-ix3 <- (2 * chunk_size + 1) : min(3 * chunk_size, n)
-ix4 <- (3 * chunk_size + 1) : n
-
-# Subset con copy() per sicurezza
-dt1 <- copy(dt_xbid_offers_tot[ix1])
-dt2 <- copy(dt_xbid_offers_tot[ix2])
-dt3 <- copy(dt_xbid_offers_tot[ix3])
-dt4 <- copy(dt_xbid_offers_tot[ix4])
-
-dt_xbid_offers <- dt3
-
 
 # check
 check_load = (nrow(dt_xbid_offers) > 0)
