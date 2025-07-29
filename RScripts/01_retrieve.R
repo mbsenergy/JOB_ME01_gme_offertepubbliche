@@ -741,7 +741,8 @@ objects_to_keep = c(
   'check_process_03',
   "dt_all_raw",
   'use_DATE',
-  'con'
+  'con',
+  'start_time'
 )
 rm(list = setdiff(ls(), objects_to_keep))
 

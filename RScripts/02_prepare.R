@@ -408,7 +408,8 @@ objects_to_keep = c(
   "dt_all_raw",
   'dt_all_elaborated',
   'use_DATE',
-  'con'
+  'con',
+  'start_time'
 )
 rm(list = setdiff(ls(), objects_to_keep))
 

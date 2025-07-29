@@ -1,9 +1,12 @@
+log_file = "jobber.log"
+sink(log_file, append = TRUE, split = TRUE)
 
-print(glue::glue("{crayon::magenta('[JOB - Starting...]')}"))
+start_time = Sys.time()
 
-# ENV Variables -------------------------------------------------------------------
+print(glue::glue(
+  "{crayon::magenta('[JOB ME01_gme_offertepubbliche - Starting...]')} {start_time}"
+))
 
-use_DATE = TRUE
 
 # Setup ----------------------------------------------------------------------
 
@@ -17,6 +20,8 @@ box::use(RPostgres[...])
 box::use(glue[...])
 box::use(fluxer[...])
 
+use_DATE = TRUE
+
 ## Log into PostgresSQL ------------
 
 con = DBI::dbConnect(
@@ -26,10 +31,10 @@ con = DBI::dbConnect(
   dbname = Sys.getenv('PG_FLUX_DBNAME'),
   user = Sys.getenv('PG_FLUX_USER'),
   password = Sys.getenv('PG_FLUX_PSW'),
-  sslmode = "require"  
+  sslmode = "require"
 )
 
-if(exists("con")) {
+if (exists("con")) {
   print(glue("{crayon::green('[CONNECTED PG]')}"))
 } else {
   print(glue("{crayon::green('[ERROR PG]')}"))
@@ -79,28 +84,32 @@ new_tables = data.table::data.table(
 # 01. Retrieve data from FRED --------------------------------------------------------
 
 source('RScripts/01_retrieve.R')
-if(!check_process_01) {
-  glue::glue("{crayon::bgRed('[ATTENTION] - 01.Retrieve')} ")  # Print error message
+if (!check_process_01) {
+  glue::glue("{crayon::bgRed('[ATTENTION] - 01.Retrieve')} ") # Print error message
 }
 
 
 # 02. Prepare data according to Schema --------------------------------------------------------
 
 source('RScripts/02_prepare.R')
-if(!check_process_02) {
-  glue::glue("{crayon::bgRed('[ATTENTION] - Push')} ")  # Print error message
+if (!check_process_02) {
+  glue::glue("{crayon::bgRed('[ATTENTION] - Push')} ") # Print error message
 }
-
-
 
 
 # 03. Push data to PRODUCTION CLUSTER - ECONOMICS Database  --------------------------------------------------------
 
 source('RScripts/03_push.R')
 
-if(!check_process_03) {
-  glue::glue("{crayon::bgRed('[ATTENTION] - Push')} ")  # Print error message
+if (!check_process_03) {
+  glue::glue("{crayon::bgRed('[ATTENTION] - Push')} ") # Print error message
 }
 
 
-print(glue("{crayon::bgMagenta('[JOB - COMPLETED!]')}"))
+elapsed = Sys.time() - start_time
+
+print(glue::glue(
+  "{crayon::bgMagenta('[JOB ME01_gme_offertepubbliche - COMPLETED!]')} Elapsed time: {round(elapsed, 2)} {units(elapsed)}"
+))
+
+sink()
