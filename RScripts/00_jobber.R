@@ -10,15 +10,15 @@ print(glue::glue(
 
 # Setup ----------------------------------------------------------------------
 
-box::use(data.table[...])
-box::use(DBI[...])
-box::use(magrittr[...])
-box::use(curl[...])
-box::use(xml2[...])
-box::use(RPostgreSQL[...])
-box::use(RPostgres[...])
-box::use(glue[...])
-box::use(fluxer[...])
+library(data.table)
+library(DBI)
+library(magrittr)
+library(curl)
+library(xml2)
+library(RPostgreSQL)
+library(RPostgres)
+library(glue)
+library(fluxer)
 
 use_DATE = TRUE
 
