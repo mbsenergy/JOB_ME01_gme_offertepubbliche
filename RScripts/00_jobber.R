@@ -40,7 +40,6 @@ if (exists("con")) {
   print(glue("{crayon::green('[ERROR PG]')}"))
 }
 
-source('RScripts/functions.R')
 
 check_process_01 = NULL
 check_process_02 = NULL
