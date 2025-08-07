@@ -1,0 +1,60 @@
+[JOB ME01_gme_offertepubbliche - Starting...] 2025-08-07 07:24:40.069821
+ ⚡ fluxer package loaded! ⚡ 
+📦 Version: 0.8.0
+👨‍💻 Authors: Flux Team
+🚀 Ready to crunch some data!
+🔍 Happy data hunting! 📊
+[CONNECTED PG]
+[INIT - 01.Retrive]
+[1] "[00/03]"
+[1] "[01/07]"
+ME01_gme_mgp_offers retrieved
+[1] "[02/07]"
+ME01_gme_msd_offers retrieved
+[1] "[03/04]"
+ME01_gme_mb_offers no new data
+[1] "[04/07]"
+ME01_gme_xbid_offers retrieved
+[1] "[05/07]"
+ME01_gme_mia1_offers retrieved
+[1] "[06/07]"
+ME01_gme_mia2_offers retrieved
+[1] "[07/07]"
+ [1] "purpose_cd"               "type_cd"                  "status_cd"                "market_cd"                "unit_reference_no"       
+ [6] "bid_offer_date_dt_parsed" "bid_offer_date_dt"        "transaction_reference_no" "quantity_no"              "awarded_quantity_no"     
+[11] "energy_price_no"          "merit_order_no"           "partial_qty_accepted_in"  "adj_quantity_no"          "grid_supply_point_no"    
+[16] "zone_cd"                  "awarded_price_no"         "operatore"                "submitted_dt"             "bilateral_in"            
+[21] "offer_type"               "interval_no"              "granularity"              "block_id"                 "minimum_acceptance_ratio"
+[26] "balanced_reference_no"   
+ME01_gme_mia3_offers retrieved
+[1] FALSE
+[1] 6
+[1] 1
+[1] 0
+           table_name num_rows        type
+               <char>    <num>      <char>
+1: ME01_gme_mb_offers        0 NO_NEW_DATA
+[1] FALSE
+[DONE - 01.Retrieve]
+[INIT - 02.Prepare]
+ME01_gme_mgp_offers processed
+[1] "[01/07]"
+ME01_gme_msd_offers processed
+[1] "[02/07]"
+ME01_gme_mb_offers nothing to process
+[1] "[03/07]"
+[1] "[04/07]"
+[1] "[05/07]"
+[1] "[06/07]"
+[1] "[07/07]"
+[DONE - 02.Prepare]
+[INIT - 03.Push]
+[CONNECTED PG]
+[1] 13
+[DONE - 03.Push]
+[JOB ME01_gme_offertepubbliche - Starting...] 2025-08-07 10:28:56.887513
+[CONNECTED PG]
+[INIT - 01.Retrive]
+[1] "[00/03]"
+[1] "[01/07]"
+ME01_gme_mgp_offers no new data

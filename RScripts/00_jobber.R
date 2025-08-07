@@ -1,6 +1,3 @@
-log_file = "jobber.log"
-sink(log_file, append = TRUE, split = TRUE)
-
 start_time = Sys.time()
 
 print(glue::glue(
@@ -110,5 +107,3 @@ elapsed = Sys.time() - start_time
 print(glue::glue(
   "{crayon::bgMagenta('[JOB ME01_gme_offertepubbliche - COMPLETED!]')} Elapsed time: {round(elapsed, 2)} {units(elapsed)}"
 ))
-
-sink()

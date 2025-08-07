@@ -669,9 +669,7 @@ list_mia3_offers <- lapply(last_files, function(file) {
 
 dt_mia3_offers = rbindlist(list_mia3_offers, fill = TRUE)
 
-dt_mia3_offers <- readRDS(file = "dt_MI3_offers_2025.rds")
 names(dt_mia3_offers)
-list_mia3_offers <- dt_mia3_offers
 
 # check
 check_load = (nrow(dt_mia3_offers) > 0)
@@ -727,7 +725,7 @@ saveRDS(dt_all_raw, 'dt_all_raw.rds')
 check_process_01 = nrow(new_data_tables) +
   nrow(nonew_data_tables) +
   nrow(failed_tables_retrieve) ==
-  3
+  7
 
 objects_to_keep = c(
   'new_data_tables',
