@@ -1,0 +1,52 @@
+CO2_products_full       CO2 Market Product Codes Mapping
+RequestInfo-class       RequestInfo Class
+calendar_holidays       Calendar of Public Holidays
+dt_fwds_gas             FWD Prices - GAS
+dt_fwds_pwr             FWD Prices - PWR
+dt_fwds_pwr_fwddam      FWD Prices or DAM Prices- PWR
+dt_spot_gas             Spot Prices - GAS
+dt_spot_pwr             Spot Prices - PWR
+gas_mapped_codes        Gas Market Mapping Table
+gas_products_full       Gas Market Product Codes Mapping
+generate_monthrics_gas
+                        Generate Monthly RICs for Gas Codes
+generate_monthrics_pwr
+                        Generate Monthly RICs for Power Codes
+generate_rics_gas       Generate a List of RICs for Gas Codes
+generate_rics_pwr       Generate a List of RICs for Power Codes
+get_app_id              Get Application ID
+get_formatted_data_frame
+                        Convert Data to Formatted Data Frame
+get_proxy_port          Get Proxy Port
+get_rics_d              Retrieve Daily Historical Market Data for a
+                        Given RIC
+get_rics_f              Retrieve Forward Market Data for a Given RIC
+get_rics_h              Retrieve Hourly Time Series Data for a Given
+                        RIC
+get_timeseries          Retrieve Historical Time Series Data
+init                    Initialize the Library Context
+is_named_list           Check if a Value is a Named List
+is_non_named_list       Check if a Value is a Non-Named List
+is_string               Check if a Value is a String
+new_calendar_holidays   New Calendar of Public Holidays
+prep_fwd_curve          Prepares Forward Curve
+print_retrieval_done    Print Gas Retrieval Completion Message with
+                        Colors
+print_retrieval_message
+                        Print Retrieval Message with Colors
+products_continuation   Continuation Codes for Power and Gas
+                        Commodities
+pwr_mapped_codes        Power Market Mapping Table
+pwr_products_full       Power Market Product Codes Mapping
+retrieve_cont           Retrieve Historical Continuation RICs from
+                        Eikon
+retrieve_fwd            Retrieve FWD Data for a Given Date Range
+retrieve_spot           Retrieve Spot Data for a Given Date Range
+reuters_months          Reuters Month Codes
+reuters_quarters_gas    Reuters Quarter Codes for Gas Markets
+reuters_quarters_pwr    Reuters Quarter Codes for Power Markets
+send_json_request       Send JSON Request
+set_app_id              Set Application ID
+set_integer_property    Set an Integer Property in a List Object
+set_proxy_port          Set Proxy Port
+set_string_property     Set a String Property in a List Object

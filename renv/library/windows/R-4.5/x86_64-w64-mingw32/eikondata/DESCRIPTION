@@ -1,0 +1,35 @@
+Package: eikondata
+Type: Package
+Title: Eikon Scripting API for R
+Version: 1.0.2
+Author: MBS
+Maintainer: MBS <alejandro.abraham@cerved.com>
+Description: Provides a lightweight R interface to the LSEG Eikon Data API,
+    enabling programmatic access to real-time and historical market data directly
+    from Eikon or via the Eikon API Proxy. The package supports retrieving time series,
+    metadata, and price data for financial instruments using simple function calls,
+    and returns data in structured R data frames. Requires a valid Refinitiv Eikon
+    license and an active Eikon session or proxy.
+License: Apache License 2.0
+Encoding: UTF-8
+LazyData: true
+URL: https://mbsenergy.github.io/eikondata/
+BugReports: https://github.com/mbsenergy/eikondata/issues
+VignetteBuilder: quarto
+RoxygenNote: 7.3.2
+Depends: R (>= 4.1.0)
+Imports: httr, jsonlite, crayon, glue, data.table
+Remotes: hadley/emo
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: eikondata
+RemoteUsername: mbsenergy
+RemoteRef: HEAD
+RemoteSha: a0c6a15d53de9ce439a6fe169ce2cc7e977f7a50
+GithubRepo: eikondata
+GithubUsername: mbsenergy
+GithubRef: HEAD
+GithubSHA1: a0c6a15d53de9ce439a6fe169ce2cc7e977f7a50
+NeedsCompilation: no
+Packaged: 2025-06-05 15:45:10 UTC; CG14489
+Built: R 4.5.0; ; 2025-06-05 15:45:11 UTC; windows

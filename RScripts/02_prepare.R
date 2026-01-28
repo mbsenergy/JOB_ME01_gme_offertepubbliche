@@ -13,11 +13,11 @@ dt_01_01 <- tryCatch(
       setDT(dt)
       setnames(dt, toupper(names(dt)))
       setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
-
+      
       dt[, md_source := "GME"]
       dt[, md_table := "MGP Offers"]
       dt[, md_last_update := Sys.Date()]
-
+      
       setcolorder(dt, neworder = c("md_source", "md_table", "md_last_update"))
       dt
     }
@@ -67,11 +67,11 @@ dt_01_02 <- tryCatch(
       colnames(dt)[which(names(dt) == "INTERVAL_NO")[1]] = "INTERVAL_NO_OLD"
       dt[, INTERVAL_NO_OLD := NULL]
       setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
-
+      
       dt[, md_source := "GME"]
       dt[, md_table := "MSD Offers"]
       dt[, md_last_update := Sys.Date()]
-
+      
       setcolorder(dt, neworder = c("md_source", "md_table", "md_last_update"))
       dt
     }
@@ -119,11 +119,11 @@ dt_01_03 <- tryCatch(
       setDT(dt)
       setnames(dt, toupper(names(dt)))
       setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
-
+      
       dt[, md_source := "GME"]
       dt[, md_table := "MB Offers"]
       dt[, md_last_update := Sys.Date()]
-
+      
       setcolorder(dt, neworder = c("md_source", "md_table", "md_last_update"))
       dt
     }
@@ -170,36 +170,36 @@ dt_01_04 <- tryCatch(
     setDT(dt)
     setnames(dt, toupper(names(dt)))
     setnames(dt, 'TIMESTAMP', 'DATETIME')
-
+    
     dt[, md_source := "GME"]
     dt[, md_table := "XBID Offers"]
     dt[, md_last_update := Sys.Date()]
-
+    
     # Estrazione robusta da PRODOTTO
     dt[,
-      c("DATE", "H", "Q", "ZONA") := {
-        matches <- regexec(
-          "^([0-9]{8})-H([0-9]{2})(?:-QH([0-9]{2}))?-(\\w+)$",
-          PRODOTTO
-        )
-        parsed <- regmatches(PRODOTTO, matches)
-        lapply(1:4, function(i) {
-          sapply(parsed, function(x) {
-            if (length(x) >= i + 1) x[[i + 1]] else NA_character_
-          })
-        })
-      }
+       c("DATE", "H", "Q", "ZONA") := {
+         matches <- regexec(
+           "^([0-9]{8})-H([0-9]{2})(?:-QH([0-9]{2}))?-(\\w+)$",
+           PRODOTTO
+         )
+         parsed <- regmatches(PRODOTTO, matches)
+         lapply(1:4, function(i) {
+           sapply(parsed, function(x) {
+             if (length(x) >= i + 1) x[[i + 1]] else NA_character_
+           })
+         })
+       }
     ]
-
+    
     # Forza Q vuoti a NA
     dt[Q == "", Q := NA_character_]
-
+    
     # Converte DATE in formato Date
     dt[, DATE := as.Date(DATE, format = "%Y%m%d")]
-
+    
     # TIPO corretto
     dt[, TIPO := ifelse(!is.na(Q), "Q", ifelse(!is.na(H), "H", NA_character_))]
-
+    
     setcolorder(
       dt,
       neworder = c(
@@ -256,11 +256,11 @@ dt_01_05 <- tryCatch(
     setDT(dt)
     setnames(dt, toupper(names(dt)))
     setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
-
+    
     dt[, md_source := "GME"]
     dt[, md_table := "mia1 Offers"]
     dt[, md_last_update := Sys.Date()]
-
+    
     setcolorder(dt, neworder = c("md_source", "md_table", "md_last_update"))
     dt
   },
@@ -305,11 +305,11 @@ dt_01_06 <- tryCatch(
     setDT(dt)
     setnames(dt, toupper(names(dt)))
     setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
-
+    
     dt[, md_source := "GME"]
     dt[, md_table := "mia2 Offers"]
     dt[, md_last_update := Sys.Date()]
-
+    
     setcolorder(dt, neworder = c("md_source", "md_table", "md_last_update"))
     dt
   },
@@ -350,11 +350,11 @@ dt_01_07 <- tryCatch(
     setDT(dt)
     setnames(dt, toupper(names(dt)))
     setnames(dt, 'BID_OFFER_DATE_DT_PARSED', 'DATE')
-
+    
     dt[, md_source := "GME"]
     dt[, md_table := "mia1 Offers"]
     dt[, md_last_update := Sys.Date()]
-
+    
     setcolorder(dt, neworder = c("md_source", "md_table", "md_last_update"))
     dt
   },

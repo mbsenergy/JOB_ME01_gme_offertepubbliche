@@ -1,0 +1,96 @@
+agsi_gas_data           Fetch Gas Data from AGSI API
+alba_download_data_gas
+                        Download and process gas price data from GEEO
+                        Energy
+alba_download_data_power
+                        Download and Process ALBA Data
+api_entsoe_dam_prices   INTERNAL - API Retrieve Day-Ahead Market Prices
+                        for a Specific Country
+api_req                 Make an API Request to ENTSO-E Web API
+compare_colnames        Compare Column Names Between Two data.tables
+datascope_download_extracted_file
+                        Download Extracted File from Refinitiv
+                        Datascope
+datascope_instrument_items
+                        Retrieve Items from a Specific Instrument List
+                        in Refinitiv DataScope Select API
+datascope_instrument_lists
+                        Retrieve Instrument Lists from Refinitiv
+                        DataScope Select API
+datascope_report_extraction_files
+                        Retrieve Files for a Specific Report Extraction
+                        from Refinitiv DataScope Select API
+datascope_report_lastextraction
+                        Retrieve Last Extraction for a Specific
+                        Schedule from Refinitiv DataScope Select API
+datascope_report_template_schedules
+                        Retrieve Schedules for a Specific Report
+                        Template from Refinitiv DataScope Select API
+datascope_report_templates
+                        Retrieve All Report Templates from Refinitiv
+                        DataScope Select API
+datascope_token         Authenticate with Refinitiv DataScope Select
+                        API
+db_get_minmax_dates     Get Minimum and Maximum Dates from a Table
+dt_obs_dist             Count unique values in a column of a data.table
+entsoe_actual_generation
+                        Retrieve and Process ENTSO-E Actual Generation
+                        Data
+entsoe_countries        List of Mapped Countries for DAM Prices
+entsoe_create_url_file
+                        Retrieve a Specific File from ENTSO-E SFTP
+                        Server
+entsoe_create_url_files
+                        Retrieve Folder Contents from ENTSO-E SFTP
+                        Server
+entsoe_create_url_folders
+                        Create URL Folder Request to ENTSO-E SFTP
+                        Server
+entsoe_dam_prices       Retrieve Day-Ahead Market Prices for a Specific
+                        Country
+entsoe_download_file    Download a File from ENTSO-E SFTP Server
+entsoe_generation_by_type
+                        Retrieve Actual Generation by Production Type
+                        for a Specific Country
+entsoe_list_files       List Files within a Specified Folder on ENTSO-E
+                        SFTP Server
+entsoe_list_folders     List Top-Level Folder Links from ENTSO-E SFTP
+                        Server
+find_missing_dates      Find Missing Dates in a Vector
+gme_dam_fabb_xml_to_data
+                        Process GME DAM Fabbisogno XML Data
+gme_dam_limtran_xml_to_data
+                        Process GME DAM Limiti Transiti XML Data
+gme_dam_liq_xml_to_data
+                        Process GME DAM Liquidity XML Data
+gme_dam_quantity_xml_to_data
+                        Process GME DAM Quantity XML Data
+gme_dam_tran_xml_to_data
+                        Process GME DAM Transiti XML Data
+gme_download_offers_file
+                        Download and Process MGP Data File
+gme_get_directory       Retrieve FTP Directory Listing from GME
+gme_igi_get_files       Retrieve Files from GME FTP Server for DAM
+                        market
+gme_mb_as_xml_to_data   Process GME Other Markets MS AS XML Data
+gme_mb_rs_xml_to_data   Process GME Other Markets MB RS XML Data
+gme_mb_tl_xml_to_data   Process GME Other Markets MB Totali XML Data
+gme_mgp_get_files       Retrieve Files from GME FTP Server for DAM
+                        market
+gme_msd_all_xml_to_data
+                        Process GME Other Markets MSD XML Data
+gme_offers_get_files    Retrieve Files from GME FTP Server for DAM
+                        market pubblic offers
+gme_other_download_file
+                        Download and Process Other Markets Data File
+gme_rest_get_files      Retrieve Files from GME FTP Server for Other
+                        markets
+gme_validate_filename   Validate Filename Structure
+gme_xbid_all_xml_to_data
+                        Process GME Other Markets XBID XML Data
+is_holiday              Check if a Date is a Holiday
+mgp_download_file       Download and Process MGP Data File
+process_alba_xlsx       Process Excel file and extract relevant data
+table_obs_dist          Count unique values in a column of a PostgreSQL
+                        table
+to_yymm                 Convert Dates to First Day of the Month

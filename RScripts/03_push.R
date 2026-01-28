@@ -168,3 +168,4 @@ DBI::dbAppendTable(con, 'table_logs', summary_table)
 message(glue("{crayon::bgGreen('[OK]')} DB Share updated correctly"))
 
 print(glue("{crayon::bgCyan('[DONE - 03.Push]')}"))
+

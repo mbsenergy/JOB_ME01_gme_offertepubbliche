@@ -1,0 +1,46 @@
+[.tbl_json              Extract subsets of a tbl_json object (not
+                        replace)
+allowed_json_types      Fundamental JSON types from http://json.org/,
+                        where I collapse 'true' and 'false' into
+                        'logical'
+append_values           Appends all JSON values with a specified type
+                        as a new column
+as.character.tbl_json   Convert the JSON in an tbl_json object back to
+                        a JSON string
+as_tibble.tbl_json      Convert a tbl_json back to a tbl_df
+commits                 Commit data for the dplyr repo from github API
+companies               Startup company information for 1,000 companies
+enter_object            Enter into a specific object and discard all
+                        other JSON data
+gather_array            Gather a JSON array into index-value pairs
+gather_object           Gather a JSON object into name-value pairs
+is_json                 Predicates to test for specific JSON types in
+                        'tbl_json' objects
+issues                  Issue data for the dplyr repo from github API
+json_complexity         Compute the complexity (recursively unlisted
+                        length) of JSON data
+json_functions          Navigates nested objects to get at names of a
+                        specific type, to be used as arguments to
+                        'spread_values'
+json_get                Get JSON from a tbl_json
+json_get_column         Make the JSON data a persistent column
+json_lengths            Compute the length of JSON data
+json_schema             Create a schema for a JSON document or
+                        collection
+json_structure          Recursively structures arbitrary JSON data into
+                        a single data frame
+json_types              Add a column that tells the 'type' of the JSON
+                        data
+print.tbl_json          Print a tbl_json object
+rbind_tbl_json          Bind two tbl_json objects together and preserve
+                        JSON attribute
+read_json               Reads JSON from an input uri (file, url, ...)
+                        and returns a 'tbl_json' object
+spread_all              Spreads all scalar values of a JSON object into
+                        new columns
+spread_values           Spreads specific scalar values of a JSON object
+                        into new columns
+tbl_json                Combines structured JSON (as a data.frame) with
+                        remaining JSON
+tidyjson                tidyjson
+worldbank               Projects funded by the World Bank

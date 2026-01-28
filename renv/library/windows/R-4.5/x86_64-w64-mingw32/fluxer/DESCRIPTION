@@ -1,0 +1,40 @@
+Package: fluxer
+Type: Package
+Title: FLUX Collection of Functions and Utilities
+Version: 0.7.0
+Authors@R: 
+    person(given = "Alejandro",
+           family = "Abraham",
+           role = c("aut", "cre"),
+           email = "alejandro.abraham@cerved.com")
+Description: A repository of utilities to programmatically interact with DATAFLUX
+    using R. The development repository is available at
+    https://github.com/mbsenergy/fluxer.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Depends: R (>= 4.4.0)
+Imports: data.table, magrittr, DBI, RPostgres, htmltools, httr, httr2,
+        curl, jsonlite, xml2, crayon, glue, tidyjson, timeDate,
+        ggplot2, openxlsx, zoo, xts, knitr, rvest
+Suggests: roxygen2, devtools, usethis, pkgdown
+URL: https://mbsenergy.github.io/fluxer/
+BugReports: https://github.com/mbsenergy/fluxer/issues
+VignetteBuilder: quarto
+RoxygenNote: 7.3.2
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: fluxer
+RemoteUsername: mbsenergy
+RemoteRef: HEAD
+RemoteSha: 774e023387ba61f0ecb295194fcac8fe60a57f29
+GithubRepo: fluxer
+GithubUsername: mbsenergy
+GithubRef: HEAD
+GithubSHA1: 774e023387ba61f0ecb295194fcac8fe60a57f29
+NeedsCompilation: no
+Packaged: 2025-06-05 15:52:55 UTC; CG14489
+Author: Alejandro Abraham [aut, cre]
+Maintainer: Alejandro Abraham <alejandro.abraham@cerved.com>
+Built: R 4.5.0; ; 2025-06-05 15:52:56 UTC; windows
