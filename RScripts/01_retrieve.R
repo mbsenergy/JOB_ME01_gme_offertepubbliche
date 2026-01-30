@@ -109,6 +109,22 @@ if (isFALSE(check_load) & isFALSE(check_files)) {
 
 
 # MSD --------------------------------------------------------------
+con = DBI::dbConnect(
+  RPostgres::Postgres(),
+  host = Sys.getenv('PG_FLUX_HOST'),
+  port = Sys.getenv('PG_FLUX_PORT'),
+  dbname = Sys.getenv('PG_FLUX_DBNAME'),
+  user = Sys.getenv('PG_FLUX_USER'),
+  password = Sys.getenv('PG_FLUX_PSW'),
+  sslmode = "require"
+)
+
+if (exists("con")) {
+  print(glue("{crayon::green('[CONNECTED PG]')}"))
+} else {
+  print(glue("{crayon::green('[ERROR PG]')}"))
+}
+
 
 if (use_DATE) {
   # Step 1: Get min and max dates
@@ -208,6 +224,21 @@ if (isFALSE(check_load) & isFALSE(check_files)) {
 
 
 # MB --------------------------------------------------------------
+con = DBI::dbConnect(
+  RPostgres::Postgres(),
+  host = Sys.getenv('PG_FLUX_HOST'),
+  port = Sys.getenv('PG_FLUX_PORT'),
+  dbname = Sys.getenv('PG_FLUX_DBNAME'),
+  user = Sys.getenv('PG_FLUX_USER'),
+  password = Sys.getenv('PG_FLUX_PSW'),
+  sslmode = "require"
+)
+
+if (exists("con")) {
+  print(glue("{crayon::green('[CONNECTED PG]')}"))
+} else {
+  print(glue("{crayon::green('[ERROR PG]')}"))
+}
 
 if (use_DATE) {
   # Step 1: Get min and max dates
@@ -307,6 +338,21 @@ if (isFALSE(check_load) & isFALSE(check_files)) {
 
 
 # XBID --------------------------------------------------------------
+con = DBI::dbConnect(
+  RPostgres::Postgres(),
+  host = Sys.getenv('PG_FLUX_HOST'),
+  port = Sys.getenv('PG_FLUX_PORT'),
+  dbname = Sys.getenv('PG_FLUX_DBNAME'),
+  user = Sys.getenv('PG_FLUX_USER'),
+  password = Sys.getenv('PG_FLUX_PSW'),
+  sslmode = "require"
+)
+
+if (exists("con")) {
+  print(glue("{crayon::green('[CONNECTED PG]')}"))
+} else {
+  print(glue("{crayon::green('[ERROR PG]')}"))
+}
 
 if (use_DATE) {
   # Step 1: Get min and max dates
@@ -411,6 +457,22 @@ if (isFALSE(check_load) & isFALSE(check_files)) {
 
 
 # MI-A1 --------------------------------------------------------------
+con = DBI::dbConnect(
+  RPostgres::Postgres(),
+  host = Sys.getenv('PG_FLUX_HOST'),
+  port = Sys.getenv('PG_FLUX_PORT'),
+  dbname = Sys.getenv('PG_FLUX_DBNAME'),
+  user = Sys.getenv('PG_FLUX_USER'),
+  password = Sys.getenv('PG_FLUX_PSW'),
+  sslmode = "require"
+)
+
+if (exists("con")) {
+  print(glue("{crayon::green('[CONNECTED PG]')}"))
+} else {
+  print(glue("{crayon::green('[ERROR PG]')}"))
+}
+
 if (use_DATE) {
   # Step 1: Get min and max dates
   date_info <- db_get_minmax_dates(con, 'ME01_gme_mia1_offers', 'DATE')
@@ -514,6 +576,22 @@ if (isFALSE(check_load) & isFALSE(check_files)) {
 
 
 # MI-A2 --------------------------------------------------------------
+con = DBI::dbConnect(
+  RPostgres::Postgres(),
+  host = Sys.getenv('PG_FLUX_HOST'),
+  port = Sys.getenv('PG_FLUX_PORT'),
+  dbname = Sys.getenv('PG_FLUX_DBNAME'),
+  user = Sys.getenv('PG_FLUX_USER'),
+  password = Sys.getenv('PG_FLUX_PSW'),
+  sslmode = "require"
+)
+
+if (exists("con")) {
+  print(glue("{crayon::green('[CONNECTED PG]')}"))
+} else {
+  print(glue("{crayon::green('[ERROR PG]')}"))
+}
+
 if (use_DATE) {
   # Step 1: Get min and max dates
   date_info <- db_get_minmax_dates(con, 'ME01_gme_mia2_offers', 'DATE')
@@ -618,6 +696,22 @@ if (isFALSE(check_load) & isFALSE(check_files)) {
 
 
 # MI-A3 --------------------------------------------------------------
+con = DBI::dbConnect(
+  RPostgres::Postgres(),
+  host = Sys.getenv('PG_FLUX_HOST'),
+  port = Sys.getenv('PG_FLUX_PORT'),
+  dbname = Sys.getenv('PG_FLUX_DBNAME'),
+  user = Sys.getenv('PG_FLUX_USER'),
+  password = Sys.getenv('PG_FLUX_PSW'),
+  sslmode = "require"
+)
+
+if (exists("con")) {
+  print(glue("{crayon::green('[CONNECTED PG]')}"))
+} else {
+  print(glue("{crayon::green('[ERROR PG]')}"))
+}
+
 if (use_DATE) {
   # Step 1: Get min and max dates
   date_info <- db_get_minmax_dates(con, 'ME01_gme_mia3_offers', 'DATE')
